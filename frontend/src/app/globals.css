@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0;
+    background-color: #111;
+    overflow: hidden;
+    width: 100%;
+}
+
+.marquee-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 10%,
+        #000 90%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 10%,
+        #000 90%,
+        transparent
+    );
+}
+
+.marquee-track {
+    display: flex;
+    gap: 15px;
+    width: max-content;
+}
+
+.fast-speed {
+    animation: scrollLeftToRight 40s linear infinite;
+}
+
+.slow-speed {
+    animation: scrollRightToLeft 50s linear infinite;
+}
+
+.carousel-item {
+    width: 300px;
+    height: 200px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+@keyframes scrollLeftToRight {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes scrollRightToLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
+}
+.logos-container {
+    width: 100%;
+    padding: 30px 0;
+    background-color: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.logos-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 15%,
+        #000 85%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 15%,
+        #000 85%,
+        transparent
+    );
+}
+
+.logos-track {
+    display: flex;
+    gap: 80px;
+    width: max-content;
+    animation: scrollLogos 30s linear infinite;
+}
+
+.logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    background: none;
+}
+
+.logo-item:hover {
+    opacity: 1;
+}
+
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
+}
