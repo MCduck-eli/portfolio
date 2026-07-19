@@ -2,6 +2,7 @@ import About from "../components/about";
 import CompanyLogos from "../components/companyLogos";
 import Contact from "../components/contact";
 import DoubleCarousel from "../components/doubleCarousel";
+import Footer from "../components/footer";
 import Hero from "../components/hero";
 import Projects from "../components/projects";
 import Services from "../components/services";
@@ -19,6 +20,7 @@ const Page = () => {
             <Projects />
             <Testimonials />
             <Contact />
+            <Footer />
         </>
     );
 };

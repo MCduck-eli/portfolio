@@ -66,15 +66,19 @@ export default function Hero() {
                         </p>
                     </div>
 
-                    <div className="flex-shrink-0 flex justify-center">
+                    <div className="shrink-0 flex justify-center">
                         <Avatar mouseX={mouseX} mouseY={mouseY} />
                     </div>
 
                     <div className="flex-1 flex justify-center md:justify-start">
                         <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-bold uppercase tracking-wider rounded-full group bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 group-hover:from-purple-600 group-hover:to-pink-500 text-white focus:ring-4 focus:outline-none focus:ring-purple-800 transition-all duration-300 transform hover:scale-105">
-                            <span className="relative px-8 py-3 transition-all ease-in duration-75 bg-black rounded-full group-hover:bg-opacity-0">
+                            <a
+                                href="https://t.me/e_halikov"
+                                target="_blank"
+                                className="relative px-8 py-3 transition-all ease-in duration-75 bg-black rounded-full group-hover:bg-opacity-0"
+                            >
                                 Contact Me
-                            </span>
+                            </a>
                         </button>
                     </div>
                 </div>

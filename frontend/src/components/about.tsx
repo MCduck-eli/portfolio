@@ -1,14 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 
 export default function About() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+
     const text =
         "I am a Full-Stack Developer specializing in Next.js, NestJS, and high-performance TypeScript applications. Having a proven track record on global freelance platforms like Upwork, I thrive on autonomous execution and end-to-end accountability. By actively leveraging next-gen AI environments like Cursor, I accelerate development cycles and deliver production-grade, rock-solid code.";
 
     return (
         <section
+            ref={sectionRef}
             id="about"
             className="w-full min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 md:px-12 relative overflow-hidden py-20"
         >
@@ -80,7 +83,7 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-6xl md:text-8xl font-sans font-[1000] tracking-tighter uppercase mb-12 select-none bg-gradient-to-t from-zinc-500 to-white bg-clip-text text-transparent"
+                    className="text-6xl md:text-8xl lg:text-[7.5rem] font-sans font-[1000] tracking-tighter uppercase mb-12 select-none w-full bg-gradient-to-t from-zinc-800 via-gray-200 to-white bg-clip-text text-transparent leading-none"
                 >
                     About Me
                 </motion.h2>
@@ -127,8 +130,7 @@ export default function About() {
                             transition={{
                                 duration: 0.8,
                                 repeat: Infinity,
-                                // @ts-ignore
-                                ease: "steps(2)",
+                                ease: "linear",
                             }}
                             className="inline-block w-2 h-4 bg-purple-400 ml-1 align-middle select-none"
                         />
@@ -142,9 +144,13 @@ export default function About() {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-bold uppercase tracking-wider rounded-full group bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white focus:ring-4 focus:outline-none focus:ring-purple-800 transition-all duration-300 transform hover:scale-105"
                 >
-                    <span className="relative px-8 py-3 transition-all ease-in duration-75 bg-black rounded-full group-hover:bg-opacity-0">
+                    <a
+                        href="https://t.me/e_halikov"
+                        target="_blank"
+                        className="relative px-8 py-3 transition-all ease-in duration-75 bg-black rounded-full group-hover:bg-opacity-0"
+                    >
                         Contact Me
-                    </span>
+                    </a>
                 </motion.button>
             </div>
         </section>
