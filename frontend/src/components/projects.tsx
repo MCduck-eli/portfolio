@@ -8,6 +8,7 @@ interface Project {
     imageBig: string;
     imageSmall1: string;
     imageSmall2: string;
+    liveUrl: string;
 }
 
 export default function Projects() {
@@ -18,6 +19,7 @@ export default function Projects() {
             imageBig: "/aitestBig.jpg",
             imageSmall1: "/aitestSmall1.jpg",
             imageSmall2: "/aitestSmall2.jpg",
+            liveUrl: "https://aitest-liart.vercel.app/",
         },
         {
             id: "02",
@@ -25,6 +27,7 @@ export default function Projects() {
             imageBig: "/zukkoBig.png",
             imageSmall1: "/zukkoSmall1.png",
             imageSmall2: "/zukkoSmall2.png",
+            liveUrl: "https://zukko-pi.vercel.app/",
         },
         {
             id: "03",
@@ -32,6 +35,7 @@ export default function Projects() {
             imageBig: "/productBig.png",
             imageSmall1: "/productSmall1.png",
             imageSmall2: "/productSmall2.png",
+            liveUrl: "https://product-project-umber.vercel.app/",
         },
         {
             id: "04",
@@ -39,6 +43,7 @@ export default function Projects() {
             imageBig: "/qurulishBig.png",
             imageSmall1: "/qurulishSmall1.png",
             imageSmall2: "/qurulishSmall2.png",
+            liveUrl: "https://qurulish-firma.vercel.app/",
         },
         {
             id: "05",
@@ -46,6 +51,7 @@ export default function Projects() {
             imageBig: "/rupinBig.png",
             imageSmall1: "/rupinSmall1.png",
             imageSmall2: "/rupinSmall2.png",
+            liveUrl: "https://rupin-travels.vercel.app/",
         },
     ];
 
@@ -84,10 +90,14 @@ export default function Projects() {
                                         </span>
                                     </div>
                                 </div>
-
-                                <button className="px-6 py-2.5 rounded-full border border-zinc-700 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                                <a
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-2.5 rounded-full border border-zinc-700 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+                                >
                                     Live Project
-                                </button>
+                                </a>
                             </div>
 
                             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
