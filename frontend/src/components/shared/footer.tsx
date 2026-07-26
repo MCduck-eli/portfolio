@@ -35,28 +35,32 @@ export default function Footer() {
                         </span>
                         <div className="flex flex-col gap-2 text-sm text-zinc-300 font-medium">
                             <a
-                                href="#"
+                                href="https://github.com/MCduck-eli"
                                 className="hover:text-white transition-colors duration-200"
+                                target="_blank"
                             >
-                                Instagram
+                                Github
                             </a>
                             <a
-                                href="#"
+                                href="https://t.me/halikov_dev"
                                 className="hover:text-white transition-colors duration-200"
+                                target="_blank"
                             >
-                                Facebook
+                                Telegram Channel{" "}
                             </a>
                             <a
-                                href="#"
+                                href="https://www.youtube.com/@eldor_halikov"
                                 className="hover:text-white transition-colors duration-200"
+                                target="_blank"
                             >
-                                Artstation
+                                You tube
                             </a>
                             <a
-                                href="#"
+                                href="https://www.linkedin.com/in/eldorjon-abdukholikov/?locale=ru"
                                 className="hover:text-white transition-colors duration-200"
+                                target="_blank"
                             >
-                                Deviantart
+                                Linkedin
                             </a>
                         </div>
                     </div>
@@ -70,18 +74,14 @@ export default function Footer() {
                                 href="mailto:halikov.dev@gmail.com"
                                 className="hover:text-white transition-colors duration-200"
                             >
-                                halikov.dev@gmail.com
+                                eldorabdukhalikov74@gmail.com
                             </a>
                             <a
                                 href="tel:+15551234567"
                                 className="hover:text-white transition-colors duration-200"
                             >
-                                +1 (555) 123-4567
+                                +998-94-022-03-61
                             </a>
-                            <p className="text-zinc-400 leading-relaxed mt-1">
-                                123 Creative Lane, Suite 45 <br /> Design City,
-                                CA 90210
-                            </p>
                         </div>
                     </div>
                 </div>
