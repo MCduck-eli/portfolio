@@ -17,9 +17,55 @@ interface ProjectsData {
     getProjects: Project[];
 }
 
+const defaultProjects: Project[] = [
+    {
+        id: "01",
+        client: "Aitest",
+        imageBig: "/aitestBig.jpg",
+        imageSmall1: "/aitestSmall1.jpg",
+        imageSmall2: "/aitestSmall2.jpg",
+        liveUrl: "https://aitest-liart.vercel.app/",
+    },
+    {
+        id: "02",
+        client: "Zukko",
+        imageBig: "/zukkoBig.png",
+        imageSmall1: "/zukkoSmall1.png",
+        imageSmall2: "/zukkoSmall2.png",
+        liveUrl: "https://zukko-pi.vercel.app/",
+    },
+    {
+        id: "03",
+        client: "Product",
+        imageBig: "/productBig.png",
+        imageSmall1: "/productSmall1.png",
+        imageSmall2: "/productSmall2.png",
+        liveUrl: "https://product-project-umber.vercel.app/",
+    },
+    {
+        id: "04",
+        client: "Qurulish Firmasi",
+        imageBig: "/qurulishBig.png",
+        imageSmall1: "/qurulishSmall1.png",
+        imageSmall2: "/qurulishSmall2.png",
+        liveUrl: "https://qurulish-firma.vercel.app/",
+    },
+    {
+        id: "05",
+        client: "Rupin Travels",
+        imageBig: "/rupinBig.png",
+        imageSmall1: "/rupinSmall1.png",
+        imageSmall2: "/rupinSmall2.png",
+        liveUrl: "https://rupin-travels.vercel.app/",
+    },
+];
+
 export default function Projects() {
     const { data } = useQuery<ProjectsData>(GET_PROJECTS_QUERY);
-    const projectsList: Project[] = data?.getProjects || [];
+    const projectsList: Project[] =
+        data?.getProjects && data.getProjects.length > 0
+            ? data.getProjects
+            : defaultProjects;
 
     return (
         <section
