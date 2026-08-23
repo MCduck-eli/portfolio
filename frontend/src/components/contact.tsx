@@ -2,15 +2,6 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useMutation } from "@apollo/client/react";
-import { SEND_MESSAGE_MUTATION } from "@/src/graphql/contact";
-
-interface SendMessageResponse {
-    sendMessage: {
-        success: boolean;
-        message: string;
-    };
-}
 
 export default function Contact() {
     const [name, setName] = useState("");
@@ -18,36 +9,44 @@ export default function Contact() {
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
     const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
-
-    const [sendMessage, { loading }] = useMutation<SendMessageResponse>(SEND_MESSAGE_MUTATION);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus(null);
+        setLoading(true);
 
         const content = phone ? `${message}\n\nPhone: ${phone}` : message;
 
         try {
-            const res = await sendMessage({
-                variables: {
-                    input: {
-                        name,
-                        email,
-                        content: content || "No message content",
-                    },
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    content: content || "No message content",
+                }),
             });
 
-            if (res.data?.sendMessage?.success) {
-                setStatus({ type: "success", text: "Your message has been sent successfully!" });
-                setName("");
-                setEmail("");
-                setPhone("");
-                setMessage("");
-                setTimeout(() => setStatus(null), 5000);
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || "An error occurred while sending message");
             }
+
+            setStatus({ type: "success", text: "Your message has been sent successfully!" });
+            setName("");
+            setEmail("");
+            setPhone("");
+            setMessage("");
+            setTimeout(() => setStatus(null), 5000);
         } catch (err: any) {
             setStatus({ type: "error", text: err.message || "An error occurred while sending message" });
+        } finally {
+            setLoading(false);
         }
     };
 
