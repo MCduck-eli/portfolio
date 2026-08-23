@@ -1,0 +1,82 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthPayload {
+  accessToken: String!
+  user: UserType!
+}
+
+type ContactResponse {
+  message: String!
+  success: Boolean!
+}
+
+input CreateContactInput {
+  content: String!
+  email: String!
+  name: String!
+}
+
+input CreateProjectInput {
+  client: String!
+  imageBig: String!
+  imageSmall1: String!
+  imageSmall2: String!
+  liveUrl: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createProject(input: CreateProjectInput!): ProjectType!
+  login(input: LoginInput!): AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
+  sendMessage(input: CreateContactInput!): ContactResponse!
+  socialLogin(input: SocialAuthInput!): AuthPayload!
+}
+
+type ProjectType {
+  client: String!
+  createdAt: DateTime!
+  id: ID!
+  imageBig: String!
+  imageSmall1: String!
+  imageSmall2: String!
+  liveUrl: String!
+}
+
+type Query {
+  getProject(id: ID!): ProjectType
+  getProjects: [ProjectType!]!
+}
+
+input RegisterInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input SocialAuthInput {
+  avatar: String
+  email: String!
+  name: String!
+  provider: String!
+  providerId: String!
+}
+
+type UserType {
+  avatar: String
+  email: String!
+  id: String!
+  name: String!
+  provider: String!
+}

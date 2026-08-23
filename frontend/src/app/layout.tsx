@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Black_Ops_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/shared/navbar";
+import ApolloAppProvider from "../components/shared/apollo-provider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -12,6 +13,7 @@ const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
     subsets: ["latin"],
 });
+
 const blackOps = Black_Ops_One({
     weight: "400",
     variable: "--font-portfolio",
@@ -41,6 +43,9 @@ export const metadata: Metadata = {
     verification: {
         google: "OuRjXr0lK6lZxY7k-Z7QzgPqJxuFh6J58h81AhO4MXs",
     },
+    icons: {
+        icon: "/logo.png",
+    },
 };
 
 export default function RootLayout({
@@ -54,8 +59,10 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} ${blackOps.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col bg-black text-white">
-                <Navbar />
-                {children}
+                <ApolloAppProvider>
+                    <Navbar />
+                    {children}
+                </ApolloAppProvider>
             </body>
         </html>
     );

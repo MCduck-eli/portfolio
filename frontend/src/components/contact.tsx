@@ -1,9 +1,56 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useMutation } from "@apollo/client/react";
+import { SEND_MESSAGE_MUTATION } from "@/src/graphql/contact";
+
+interface SendMessageResponse {
+    sendMessage: {
+        success: boolean;
+        message: string;
+    };
+}
 
 export default function Contact() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+    const [sendMessage, { loading }] = useMutation<SendMessageResponse>(SEND_MESSAGE_MUTATION);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus(null);
+
+        const content = phone ? `${message}\n\nPhone: ${phone}` : message;
+
+        try {
+            const res = await sendMessage({
+                variables: {
+                    input: {
+                        name,
+                        email,
+                        content: content || "No message content",
+                    },
+                },
+            });
+
+            if (res.data?.sendMessage?.success) {
+                setStatus({ type: "success", text: "Your message has been sent successfully!" });
+                setName("");
+                setEmail("");
+                setPhone("");
+                setMessage("");
+                setTimeout(() => setStatus(null), 5000);
+            }
+        } catch (err: any) {
+            setStatus({ type: "error", text: err.message || "An error occurred while sending message" });
+        }
+    };
+
     return (
         <section
             id="contact"
@@ -58,7 +105,7 @@ export default function Contact() {
                     </div>
                     <div className="mt-8 lg:mt-24">
                         <a
-                            href="mailto:halikov.dev@gmail.com"
+                            href="mailto:eldorabdukhalikov74@gmail.com"
                             className="text-xl md:text-2xl font-sans font-black tracking-tight border-b-2 border-black pb-1 hover:text-zinc-600 hover:border-zinc-600 transition-colors duration-300"
                         >
                             eldorabdukhalikov74@gmail.com
@@ -66,12 +113,14 @@ export default function Contact() {
                     </div>
                 </div>
 
-                <form className="w-full flex flex-col gap-8">
+                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
                     <div className="w-full flex flex-col gap-2">
                         <input
                             type="text"
                             placeholder="Full Name *"
                             required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full bg-transparent border-b border-black/20 py-4 text-base font-medium placeholder-zinc-400 focus:outline-none focus:border-black transition-colors duration-300 font-sans"
                         />
                     </div>
@@ -82,6 +131,8 @@ export default function Contact() {
                                 type="email"
                                 placeholder="Email *"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-transparent border-b border-black/20 py-4 text-base font-medium placeholder-zinc-400 focus:outline-none focus:border-black transition-colors duration-300 font-sans"
                             />
                         </div>
@@ -89,6 +140,8 @@ export default function Contact() {
                             <input
                                 type="tel"
                                 placeholder="Phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                                 className="w-full bg-transparent border-b border-black/20 py-4 text-base font-medium placeholder-zinc-400 focus:outline-none focus:border-black transition-colors duration-300 font-sans"
                             />
                         </div>
@@ -98,15 +151,30 @@ export default function Contact() {
                         <textarea
                             placeholder="Message"
                             rows={4}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                             className="w-full bg-transparent border-b border-black/20 py-4 text-base font-medium placeholder-zinc-400 focus:outline-none focus:border-black transition-colors duration-300 resize-none font-sans"
                         />
                     </div>
 
+                    {status && (
+                        <div
+                            className={`p-3 rounded-xl text-xs font-medium ${
+                                status.type === "success"
+                                    ? "bg-emerald-500/10 text-emerald-700 border border-emerald-500/20"
+                                    : "bg-red-500/10 text-red-700 border border-red-500/20"
+                            }`}
+                        >
+                            {status.text}
+                        </div>
+                    )}
+
                     <button
                         type="submit"
-                        className="w-full mt-4 py-4 rounded-full border border-black/80 text-sm font-bold uppercase tracking-widest bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 font-sans"
+                        disabled={loading}
+                        className="w-full mt-4 py-4 rounded-full border border-black/80 text-sm font-bold uppercase tracking-widest bg-transparent text-black hover:bg-black hover:text-white transition-all duration-300 font-sans disabled:opacity-50"
                     >
-                        SEND
+                        {loading ? "SENDING..." : "SEND"}
                     </button>
                 </form>
             </div>

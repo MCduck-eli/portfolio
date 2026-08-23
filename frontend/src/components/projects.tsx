@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useQuery } from "@apollo/client/react";
+import { GET_PROJECTS_QUERY } from "@/src/graphql/project";
 
 interface Project {
     id: string;
@@ -11,49 +13,13 @@ interface Project {
     liveUrl: string;
 }
 
+interface ProjectsData {
+    getProjects: Project[];
+}
+
 export default function Projects() {
-    const projectsList: Project[] = [
-        {
-            id: "01",
-            client: "Aitest",
-            imageBig: "/aitestBig.jpg",
-            imageSmall1: "/aitestSmall1.jpg",
-            imageSmall2: "/aitestSmall2.jpg",
-            liveUrl: "https://aitest-liart.vercel.app/",
-        },
-        {
-            id: "02",
-            client: "Zukko",
-            imageBig: "/zukkoBig.png",
-            imageSmall1: "/zukkoSmall1.png",
-            imageSmall2: "/zukkoSmall2.png",
-            liveUrl: "https://zukko-pi.vercel.app/",
-        },
-        {
-            id: "03",
-            client: "Product",
-            imageBig: "/productBig.png",
-            imageSmall1: "/productSmall1.png",
-            imageSmall2: "/productSmall2.png",
-            liveUrl: "https://product-project-umber.vercel.app/",
-        },
-        {
-            id: "04",
-            client: "Qurulish Firmasi",
-            imageBig: "/qurulishBig.png",
-            imageSmall1: "/qurulishSmall1.png",
-            imageSmall2: "/qurulishSmall2.png",
-            liveUrl: "https://qurulish-firma.vercel.app/",
-        },
-        {
-            id: "05",
-            client: "Rupin Travels",
-            imageBig: "/rupinBig.png",
-            imageSmall1: "/rupinSmall1.png",
-            imageSmall2: "/rupinSmall2.png",
-            liveUrl: "https://rupin-travels.vercel.app/",
-        },
-    ];
+    const { data } = useQuery<ProjectsData>(GET_PROJECTS_QUERY);
+    const projectsList: Project[] = data?.getProjects || [];
 
     return (
         <section
@@ -79,7 +45,7 @@ export default function Projects() {
                             <div className="w-full flex items-center justify-between border-b border-zinc-800/60 pb-6">
                                 <div className="flex items-center gap-6">
                                     <span className="text-5xl md:text-6xl font-sans font-[1000] tracking-tighter text-white">
-                                        {project.id}
+                                        {String(index + 1).padStart(2, "0")}
                                     </span>
                                     <div className="flex flex-col">
                                         <span className="text-xs uppercase tracking-widest text-zinc-400 font-extrabold">
