@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { useQuery } from "@apollo/client/react";
-import { GET_PROJECTS_QUERY } from "@/src/graphql/project";
 
 interface Project {
     id: string;
@@ -11,10 +9,6 @@ interface Project {
     imageSmall1: string;
     imageSmall2: string;
     liveUrl: string;
-}
-
-interface ProjectsData {
-    getProjects: Project[];
 }
 
 const defaultProjects: Project[] = [
@@ -61,11 +55,7 @@ const defaultProjects: Project[] = [
 ];
 
 export default function Projects() {
-    const { data } = useQuery<ProjectsData>(GET_PROJECTS_QUERY);
-    const projectsList: Project[] =
-        data?.getProjects && data.getProjects.length > 0
-            ? data.getProjects
-            : defaultProjects;
+    const projectsList: Project[] = defaultProjects;
 
     return (
         <section

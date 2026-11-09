@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Black_Ops_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/shared/navbar";
-import ApolloAppProvider from "../components/shared/apollo-provider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -59,10 +58,8 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} ${blackOps.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col bg-black text-white">
-                <ApolloAppProvider>
-                    <Navbar />
-                    {children}
-                </ApolloAppProvider>
+                <Navbar />
+                {children}
             </body>
         </html>
     );
